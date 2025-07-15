@@ -95,6 +95,13 @@
         font-weight: 500;
     }
 
+    .login-bar {
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        height: 8px;
+        border-radius: 4px;
+        transition: width 0.8s ease;
+    }
+
     body {
         background: #f8f9fa;
     }
@@ -192,13 +199,30 @@
     </div>
 </div>
 
-<h4>Total Logins by User</h4>
-<ul class="list-group">
-    <?php foreach ($data['logins'] as $log): ?>
-        <li class="list-group-item">
-            <?= $log['username'] ?>: <?= $log['total_logins'] ?> logins
-        </li>
-    <?php endforeach; ?>
-</ul>
+<div class="chart-container mt-4">
+    <h4 class="section-title">
+        <i class="fas fa-users me-2"></i>
+        User Login Statistics
+    </h4>
+    <div class="row">
+        <?php 
+        $maxLogins = max(array_column($data['logins'], 'total_logins'));
+        foreach ($data['logins'] as $log): 
+            $percentage = ($log['total_logins'] / $maxLogins) * 100;
+        ?>
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="p-3 border rounded">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <strong><?= $log['username'] ?></strong>
+                        <span class="badge bg-primary"><?= $log['total_logins'] ?> logins</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="login-bar" style="width: <?= $percentage ?>%"></div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
