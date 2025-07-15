@@ -36,19 +36,19 @@ class User {
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
   
-  public function authenticate($username, $password) {
-      $username = strtolower($username);
-      $db = db_connect();
+ public function authenticate($username, $password) {
+    $username = strtolower($username);
+    $db = db_connect();
 
-      $recentFails = $this->getFailedAuthenticationAttempts($username);
-      if (count($recentFails) === 3) {
-          $lastFailTime = strtotime($recentFails[0]['timestamp']);
-          if (time() - $lastFailTime < 60) {
-              $_SESSION['error'] = "Too many failed attempts. Try again in 60 seconds.";
-              header('Location: /login');
-              exit;
-          }
-      }
+    $recentFails = $this->getFailedAuthenticationAttempts($username);
+    if (count($recentFails) === 3) {
+        $lastFailTime = strtotime($recentFails[0]['timestamp']);
+        if (time() - $lastFailTime < 60) {
+            $_SESSION['error'] = "Too many failed attempts. Try again in 60 seconds.";
+            header('Location: /login');
+            exit;
+        }
+    }
 
     $stmt = $db->prepare("SELECT * FROM users WHERE username = :name");
     $stmt->bindValue(':name', $username);
@@ -59,6 +59,7 @@ class User {
         $_SESSION['auth'] = 1;
         $_SESSION['username'] = ucwords($username);
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['is_admin'] = $user['is_admin'];
         $this->logAuthenticationAttempts($username, 'good');
         header('Location: /home');
         exit;
@@ -68,7 +69,8 @@ class User {
         header('Location: /login');
         exit;
     }
-  }
+}
+
 
   public function create_user($username, $password) {
       $db = db_connect();
