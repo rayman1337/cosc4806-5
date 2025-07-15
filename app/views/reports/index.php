@@ -13,6 +13,17 @@
   <?php endforeach; ?>
 </ul>
 
+<h4>Deleted Reminders</h4>
+<ul class="list-group mb-4">
+  <?php foreach ($data['deleted'] as $note): ?>
+    <li class="list-group-item list-group-item-danger">
+      <strong><?= htmlspecialchars($note['subject']) ?></strong> — 
+      User ID: <?= $note['user_id'] ?>
+    </li>
+  <?php endforeach; ?>
+</ul>
+
+
 <h4>Total Logins by User</h4>
 <ul class="list-group">
   <?php foreach ($data['logins'] as $log): ?>
