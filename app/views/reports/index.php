@@ -2,7 +2,7 @@
 
 <style>
     .dashboard-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #007bff;
         color: white;
         padding: 2rem;
         border-radius: 15px;
@@ -27,7 +27,7 @@
     .stat-number {
         font-size: 2.5rem;
         font-weight: 700;
-        background: linear-gradient(45deg, #667eea, #764ba2);
+        background: linear-gradient(45deg, #007bff, #0069d9);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -57,7 +57,7 @@
         transform: translateY(-50%);
         width: 4px;
         height: 100%;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #007bff, #0069d9);
         border-radius: 2px;
     }
 
@@ -87,7 +87,7 @@
     }
 
     .user-badge {
-        background: linear-gradient(45deg, #667eea, #764ba2);
+        background: linear-gradient(45deg, #007bff, #0069d9);
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 20px;
@@ -96,7 +96,7 @@
     }
 
     .login-bar {
-        background: linear-gradient(90deg, #667eea, #764ba2);
+        background: linear-gradient(90deg, #007bff, #0069d9);
         height: 8px;
         border-radius: 4px;
         transition: width 0.8s ease;
@@ -112,7 +112,6 @@
         <i class="fas fa-chart-line me-2"></i>
         Admin Dashboard
     </h1>
-    <p class="mb-0 opacity-75">Real-time insights and analytics</p>
 </div>
 
 <div class="row mb-4">
