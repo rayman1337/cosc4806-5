@@ -21,10 +21,3 @@
     </li>
   <?php endforeach; ?>
 </ul>
-
-<!-- DEBUG -->
-<pre>
-<?php print_r($data['logins']); ?>
-</pre>
-
-<?php require_once 'app/views/templates/footer.php'; ?>
