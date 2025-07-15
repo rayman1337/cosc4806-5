@@ -33,6 +33,59 @@
         background-clip: text;
     }
 
+    .chart-container {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-left: 20px;
+    }
+
+    .section-title::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+    }
+
+    .reminder-item {
+        background: white;
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .reminder-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .reminder-item.deleted {
+        border-left: 4px solid #e74c3c;
+        background: linear-gradient(90deg, #fdf2f2 0%, white 100%);
+    }
+
+    .reminder-item.active {
+        border-left: 4px solid #27ae60;
+        background: linear-gradient(90deg, #f0f9f0 0%, white 100%);
+    }
+
     .user-badge {
         background: linear-gradient(45deg, #667eea, #764ba2);
         color: white;
@@ -93,23 +146,51 @@
     </div>
 </div>
 
-<h4>All Reminders</h4>
-<ul class="list-group mb-4">
-    <?php foreach ($data['notes'] as $note): ?>
-        <li class="list-group-item">
-            <?= htmlspecialchars($note['subject']) ?> — User ID: <?= $note['user_id'] ?>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="chart-container">
+            <h4 class="section-title">
+                <i class="fas fa-bell me-2"></i>
+                Active Reminders
+            </h4>
+            <div class="reminder-list" style="max-height: 400px; overflow-y: auto;">
+                <?php foreach ($data['notes'] as $note): ?>
+                    <div class="reminder-item active">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1"><?= htmlspecialchars($note['subject']) ?></h6>
+                                <small class="text-muted">User ID: <?= $note['user_id'] ?></small>
+                            </div>
+                            <span class="badge bg-success">Active</span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 
-<h4>Deleted Reminders</h4>
-<ul class="list-group mb-4">
-    <?php foreach ($data['deleted'] as $note): ?>
-        <li class="list-group-item list-group-item-danger">
-            <strong><?= htmlspecialchars($note['subject']) ?></strong> — User ID: <?= $note['user_id'] ?>
-        </li>
-    <?php endforeach; ?>
-</ul>
+    <div class="col-lg-6">
+        <div class="chart-container">
+            <h4 class="section-title">
+                <i class="fas fa-trash me-2"></i>
+                Deleted Reminders
+            </h4>
+            <div class="reminder-list" style="max-height: 400px; overflow-y: auto;">
+                <?php foreach ($data['deleted'] as $note): ?>
+                    <div class="reminder-item deleted">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1"><?= htmlspecialchars($note['subject']) ?></h6>
+                                <small class="text-muted">User ID: <?= $note['user_id'] ?></small>
+                            </div>
+                            <span class="badge bg-danger">Deleted</span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
 
 <h4>Total Logins by User</h4>
 <ul class="list-group">
