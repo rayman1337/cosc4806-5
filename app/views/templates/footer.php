@@ -1,20 +1,8 @@
-<footer class="footer">
-    <style>
-        .footer {
-            text-align: center;
-            padding: 15px 0;
-            background-color: #f8f9fa;
-            font-size: 14px;
-            color: #666;
-            margin-top: 40px;
-            border-top: 1px solid #ddd;
-        }
-    </style>
-
-    <p>&copy; <?= date('Y') ?> | All rights reserved.</p>
+<footer class="text-center py-3 mt-5 border-top bg-light text-muted">
+    <p class="mb-0">&copy; <?= date('Y') ?> | All rights reserved.</p>
 </footer>
 
-</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
