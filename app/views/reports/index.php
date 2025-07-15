@@ -153,6 +153,27 @@
     </div>
 </div>
 
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="chart-container">
+            <h4 class="section-title">
+                <i class="fas fa-chart-bar me-2"></i>
+                User Login Activity
+            </h4>
+            <canvas id="loginChart" height="100"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="chart-container">
+            <h4 class="section-title">
+                <i class="fas fa-chart-pie me-2"></i>
+                Reminder Status
+            </h4>
+            <canvas id="reminderChart"></canvas>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-6">
         <div class="chart-container">
@@ -224,5 +245,75 @@
         <?php endforeach; ?>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+    const loginCtx = document.getElementById('loginChart').getContext('2d');
+    const loginChart = new Chart(loginCtx, {
+        type: 'bar',
+        data: {
+            labels: [<?php echo implode(',', array_map(function($log) { return "'" . addslashes($log['username']) . "'"; }, $data['logins'])); ?>],
+            datasets: [{
+                label: 'Total Logins',
+                data: [<?php echo implode(',', array_column($data['logins'], 'total_logins')); ?>],
+                backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                borderColor: 'rgba(102, 126, 234, 1)',
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+
+    const reminderCtx = document.getElementById('reminderChart').getContext('2d');
+    const reminderChart = new Chart(reminderCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Active', 'Deleted'],
+            datasets: [{
+                data: [<?= count($data['notes']) ?>, <?= count($data['deleted']) ?>],
+                backgroundColor: [
+                    'rgba(39, 174, 96, 0.8)',
+                    'rgba(231, 76, 60, 0.8)'
+                ],
+                borderWidth: 3,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                }
+            }
+        }
+    });
+</script>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
