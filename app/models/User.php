@@ -109,5 +109,4 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    
 }

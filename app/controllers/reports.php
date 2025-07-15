@@ -12,12 +12,12 @@ class Reports extends Controller {
         $noteModel = $this->model('Note');
         $userModel = $this->model('User');
 
-        $notes = $noteModel->getAllNotesWithUser();
+        $allNotes = $noteModel->getAll();
         $mostNotesUser = $noteModel->getUserWithMostNotes();
         $loginCounts = $userModel->getLoginCounts();
 
         $this->view('reports/index', [
-            'notes' => $notes,
+            'notes' => $allNotes,
             'mostNotesUser' => $mostNotesUser,
             'logins' => $loginCounts
         ]);

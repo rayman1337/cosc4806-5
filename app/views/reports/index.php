@@ -8,12 +8,10 @@
 <ul class="list-group mb-4">
   <?php foreach ($data['notes'] as $note): ?>
     <li class="list-group-item">
-      <strong><?= htmlspecialchars($note['subject']) ?></strong> — 
-      User: <?= htmlspecialchars($note['username']) ?> (ID: <?= $note['user_id'] ?>)
+      <?= htmlspecialchars($note['subject']) ?> — User ID: <?= $note['user_id'] ?>
     </li>
   <?php endforeach; ?>
 </ul>
-
 
 <h4>Total Logins by User</h4>
 <ul class="list-group">
@@ -23,3 +21,5 @@
     </li>
   <?php endforeach; ?>
 </ul>
+
+<?php require_once 'app/views/templates/footer.php'; ?>
