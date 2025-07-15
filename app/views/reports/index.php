@@ -10,6 +10,29 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
+    .stat-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
     body {
         background: #f8f9fa;
     }
@@ -22,6 +45,35 @@
     </h1>
     <p class="mb-0 opacity-75">Real-time insights and analytics</p>
 </div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <div class="stat-number"><?= count($data['notes']) ?></div>
+            <div class="text-muted">Total Reminders</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <div class="stat-number"><?= count($data['deleted']) ?></div>
+            <div class="text-muted">Deleted Items</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <div class="stat-number"><?= count($data['logins']) ?></div>
+            <div class="text-muted">Active Users</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <div class="stat-number"><?= $data['mostNotesUser']['total'] ?></div>
+            <div class="text-muted">Top User Activity</div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-primary">User with Most Reminders: <strong><?= $data['mostNotesUser']['username'] ?></strong> (<?= $data['mostNotesUser']['total'] ?> reminders)</div>
 
 <h4>All Reminders</h4>
 <ul class="list-group mb-4">
