@@ -54,4 +54,9 @@ public function getUserWithMostNotes() {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+    public function getDeleted() {
+        $stmt = $this->db->prepare("SELECT * FROM notes WHERE deleted = 1 ORDER BY created_at DESC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
