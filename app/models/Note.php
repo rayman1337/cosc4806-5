@@ -54,4 +54,16 @@ class Note {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getAllNotesWithUser() {
+        $stmt = $this->db->query("
+            SELECT notes.*, users.username 
+            FROM notes 
+            JOIN users ON notes.user_id = users.id 
+            WHERE notes.deleted = 0 
+            ORDER BY notes.created_at DESC
+        ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }
