@@ -33,6 +33,15 @@
         background-clip: text;
     }
 
+    .user-badge {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
     body {
         background: #f8f9fa;
     }
@@ -73,7 +82,16 @@
     </div>
 </div>
 
-<div class="alert alert-primary">User with Most Reminders: <strong><?= $data['mostNotesUser']['username'] ?></strong> (<?= $data['mostNotesUser']['total'] ?> reminders)</div>
+<div class="alert alert-info border-0 shadow-sm mb-4" style="border-radius: 15px; background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);">
+    <div class="d-flex align-items-center">
+        <i class="fas fa-trophy text-warning me-3" style="font-size: 1.5rem;"></i>
+        <div>
+            <strong>Most Active User:</strong> 
+            <span class="user-badge"><?= $data['mostNotesUser']['username'] ?></span>
+            <span class="ms-2 text-muted">with <?= $data['mostNotesUser']['total'] ?> reminders</span>
+        </div>
+    </div>
+</div>
 
 <h4>All Reminders</h4>
 <ul class="list-group mb-4">
