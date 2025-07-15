@@ -96,4 +96,18 @@ class User {
           return false;  
       }
   }
+
+
+    public function getLoginCounts() {
+        $db = db_connect();
+        $stmt = $db->query("
+            SELECT username, COUNT(*) as total_logins 
+            FROM login_logs 
+            WHERE attempt = 'good' 
+            GROUP BY username
+        ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
 }
